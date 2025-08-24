@@ -1,20 +1,17 @@
 
 
-
-
-
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom'; // ✅ added useNavigate
+import { Link, useNavigate } from 'react-router-dom'; 
 import { assets } from '../assets/assets';
 
 
 
-const Navbar = ({ onLoginClick, isLoggedIn, onLogout }) => { // ✅ added props
+const Navbar = ({ onLoginClick, isLoggedIn, onLogout }) => { 
   const navLinks = []
 
   const [isScrolled, setIsScrolled] = React.useState(false);
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-  const navigate = useNavigate(); // ✅ added navigate
+  const navigate = useNavigate(); 
 
   React.useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 10);
@@ -86,10 +83,8 @@ const Navbar = ({ onLoginClick, isLoggedIn, onLogout }) => { // ✅ added props
               >
                 Log In
               </button>
-              {/* ...existing code... */}
             </>
           )}
-          {/* ...existing code... */}
         </div>
 
       {/* Mobile Nav Toggle */}

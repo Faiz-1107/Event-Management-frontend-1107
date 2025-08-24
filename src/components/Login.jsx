@@ -1,11 +1,11 @@
 
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // ✅ import navigate
+import { useNavigate } from "react-router-dom"; 
 
 export default function Login({ onShowSignup, onLoginSuccess }) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const navigate = useNavigate(); // ✅ hook for navigation
+    const navigate = useNavigate(); 
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -21,11 +21,11 @@ export default function Login({ onShowSignup, onLoginSuccess }) {
             const data = await res.json();
 
             if (res.ok && data.success) {
-                // ✅ Save token
+                // Saves token
                 localStorage.setItem("token", data.token);
                 if (onLoginSuccess) onLoginSuccess();
 
-                // ✅ Navigate to Events page
+                // Navigates to Events page
                 navigate("/events");
             } else {
                 alert(data.error || "Login failed");

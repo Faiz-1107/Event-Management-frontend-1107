@@ -1,9 +1,9 @@
 
 import React from "react";
-import { useNavigate } from "react-router-dom"; // ✅ Added for navigation
+import { useNavigate } from "react-router-dom"; 
 
-const Hero = ({ isLoggedIn, onShowSignup }) => { // ✅ Accept isLoggedIn as prop
-    const navigate = useNavigate(); // ✅ Hook for navigation
+const Hero = ({ isLoggedIn, onShowSignup }) => { 
+    const navigate = useNavigate(); 
 
     return (
         <>
