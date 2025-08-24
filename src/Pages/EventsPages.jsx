@@ -1,106 +1,118 @@
-
-
-import React from "react";
+import React, { useEffect, useState } from "react";   
 import { useNavigate } from "react-router-dom";
 
 export default function EventsPage() {
   const navigate = useNavigate();
+  const [events, setEvents] = useState([]);  
 
-  const events = [
-    {
-      id: 1,
-      title: "Premium Basmati Rice",
-      desc: "Experience the finest aged Basmati rice sourced directly from Punjab, known for its long grains and unmatched aroma. Perfect for biryani lovers and fine dining.",
-      location: "Lahore, Pakistan",
-      time: "06:11",
-      seats: 100,
-      date: "2025-08-02",
-      image: "/src/assets/Pakistan.png",
-    },
-    {
-      id: 2,
-      title: "Luxury Arabian Dry Fruits",
-      desc: "A special collection of premium dry fruits including Omani dates, Iranian pistachios, Turkish apricots, and Saudi almonds. Ideal for festive gifting and healthy snacking.",
-      location: "Dubai, United Arab Emirates",
-      time: "06:13",
-      seats: 199,
-      date: "2025-08-07",
-      image: "/src/assets/UAE.jpg",
-    },
-    {
-      id: 3,
-      title: "Turkish Exotic Fruits",
-      desc: "Discover and bid on Türkiye’s most famous fruits, including sweet figs from Aydın, juicy cherries from Konya, pomegranates from Antalya, and the world-renowned Sultana grapes from Manisa. A rare chance to taste and own the best harvests of Turkish orchards.",
-      location: "Istanbul, Türkiye",
-      time: "18:08",
-      seats: 100,
-      date: "2025-08-08",
-      image: "/src/assets/Turkeyy.jpeg",
-    },
-  ];
+  // Fetch events from backend
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const res = await fetch("http://localhost:8888/events");
+        const data = await res.json();
+        setEvents(data);
+      } catch (err) {
+        console.error("Error fetching events:", err);
+      }
+    };
+    fetchEvents();
+  }, []);
 
   const handleViewDetails = (event) => {
     navigate(`/events/${event.id}`, { state: { event } });
   };
 
+  // Delete event function
+  const handleDelete = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this event?")) return;
+
+    try {
+      const res = await fetch(`http://localhost:8888/events/${id}`, {
+        method: "DELETE",
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        alert(data.message);
+        setEvents(events.filter((event) => event.id !== id)); 
+      } else {
+        alert(data.error || "Failed to delete event");
+      }
+    } catch (err) {
+      console.error("Error deleting event:", err);
+      alert("Something went wrong");
+    }
+  };
+
   return (
     <div className="relative min-h-screen text-white">
-      {/* Background Video */}
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="absolute top-0 left-0 w-full h-full object-cover -z-10 opacity-90"
-      >
-        <source src="/src/assets/homevideo.mp4" type="video/mp4" />
-      </video>
 
       {/* Content Wrapper (padding for navbar) */}
       <div className="pt-28 px-6 pb-10">
-        <h1 className="text-5xl md:text-6xl font-extrabold text-center mb-10 text-yellow-400 
-               px-8 py-4 rounded-2xl shadow-lg 
-               bg-gradient-to-r from-gray-500 via-gray-650 to-zinc-900 
-               w-fit mx-auto block">
-           Upcoming Events
-        </h1>
+        {/* Title + Create Event */}
+        <div className="flex justify-between items-center mb-10">
+          <h1 className="text-5xl md:text-6xl font-extrabold text-center text-yellow-400 
+                 px-8 py-4 rounded-2xl shadow-lg 
+                 bg-gradient-to-r from-gray-500 via-gray-650 to-zinc-900">
+             Upcoming Events
+          </h1>
 
+          <button
+            onClick={() => navigate("/create-event")}
+            className="ml-4 bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl font-semibold shadow-lg"
+          >
+            + Create Event
+          </button>
+        </div>
 
         {/* Events Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {events.map((event) => (
             <div
               key={event.id}
-              className="bg-[#0B1221]/90 rounded-2xl shadow-xl p-6 flex flex-col"
+              className="bg-[#0B1221]/90 rounded-2xl shadow-xl p-4 flex flex-col"
             >
-              {event.image && (
+              {/* Banner Image */}
+              {event.banner_image && (
                 <img
-                  src={event.image}
+                  src={event.banner_image}
                   alt={event.title}
-                  className="rounded-xl mb-4"
+                  className="rounded-xl mb-4 h-48 w-full object-cover"
                 />
               )}
 
-              <h2 className="text-xl font-semibold mb-2">{event.title}</h2>
-              <p className="text-gray-300 flex-grow">{event.desc}</p>
+              <h2 className="text-xl font-bold mb-2">{event.title}</h2>
+              <p className="text-gray-300 text-sm mb-3">{event.description}</p>
 
-              {/* Meta Info */}
-              <div className="flex justify-between text-sm text-gray-400 mt-4">
+              <div className="flex justify-between text-sm text-gray-400 mb-2">
                 <span>📍 {event.location}</span>
-                <span>🕒 {event.time}</span>
-              </div>
-              <div className="flex justify-between mt-2 text-yellow-400 font-medium">
-                <span>Seats Left: {event.seats}</span>
-                <span>📅 {event.date}</span>
+                <span>⏰ {event.time}</span>
               </div>
 
-              {/* Button */}
-              <button
-                onClick={() => handleViewDetails(event)}
-                className="mt-4 bg-yellow-400 text-black py-2 px-4 rounded-lg font-bold hover:bg-yellow-300 transition-all"
-              >
-                View Details →
-              </button>
+              <div className="flex justify-between text-sm font-medium mb-4">
+                <span className="text-yellow-400">Seats Left: {event.left_seats}</span>
+                <span className="text-yellow-300">📅 {event.date}</span>
+              </div>
+
+              {/* Buttons */}
+              <div className="flex justify-between gap-2 mt-auto">
+                <button
+                  onClick={() => handleViewDetails(event)}
+                  className="flex-1 bg-yellow-400 text-black py-2 px-4 rounded-lg font-bold hover:bg-yellow-300 transition-all"
+                >
+                  View Details →
+                </button>
+
+                {/* ⭐ Delete Button */}
+                <button
+                  onClick={() => handleDelete(event.id)}
+                  className="bg-red-600 text-white py-2 px-4 rounded-lg font-bold hover:bg-red-700 transition-all"
+                >
+                  🗑 Delete
+                </button>
+              </div>
             </div>
           ))}
         </div>

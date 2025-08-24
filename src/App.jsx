@@ -10,6 +10,7 @@ import Login from "./components/Login";
 import EventsPages from "./Pages/EventsPages";
 import EventDetails from "./Pages/EventDetails";
 import RegistrationPage from "./Pages/RegistrationPage";
+import CreateEvent from "./Pages/CreateEvent";
 
 const App = () => {
   const [showAuthModal, setShowAuthModal] = useState(false);
@@ -34,7 +35,20 @@ const App = () => {
   };
 
   return (
-    <div className="min-h-[70vh]">
+    <div className="relative min-h-screen text-white">
+      {/* Background Video */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="fixed top-0 left-0 w-full h-full object-cover -z-10 opacity-90"
+      >
+        <source src="/src/assets/homevideo.mp4" type="video/mp4" />
+      </video>
+
+
+
       <Navbar
         onLoginClick={() => {
           setIsLogin(true);
@@ -55,7 +69,7 @@ const App = () => {
               }}
               isLoggedIn={isLoggedIn}
               onLogout={handleLogout}
-              isAdminLoggedIn={isAdminLoggedIn}     
+              isAdminLoggedIn={isAdminLoggedIn}
               onAdminLogout={handleAdminLogout}
             />
           }
@@ -64,6 +78,7 @@ const App = () => {
         <Route path="/events/:id" element={<EventDetails />} />
         <Route path="/register" element={<RegistrationPage />} />
         <Route path="*" element={<Navigate to="/" />} />
+        <Route path="/create-event" element={<CreateEvent />} />
       </Routes>
 
       {/* authentication modal */}

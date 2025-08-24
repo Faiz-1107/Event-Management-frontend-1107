@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom'; 
 import { assets } from '../assets/assets';
@@ -38,7 +36,7 @@ const Navbar = ({ onLoginClick, isLoggedIn, onLogout }) => {
       </Link>
 
       {/* Desktop Nav */}
-      <div className="hidden md:flex items-center gap-4 lg:gap-8">
+      <div className="flex items-center gap-4 lg:gap-8">
         {navLinks.map((link, i) => (
           <Link
             key={i}
@@ -55,7 +53,7 @@ const Navbar = ({ onLoginClick, isLoggedIn, onLogout }) => {
         ))}
       </div>
 
-      {/* Desktop Right */}
+      {/* Login and Logout */}
         <div className="flex md:flex items-center gap-4">
           {isLoggedIn ? (
             <button
@@ -86,35 +84,6 @@ const Navbar = ({ onLoginClick, isLoggedIn, onLogout }) => {
             </>
           )}
         </div>
-
-      {/* Mobile Nav Toggle */}
-      <div className="md:hidden flex items-center">
-        <button onClick={() => setIsMenuOpen(!isMenuOpen)}>
-          <svg
-            className="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            {isMenuOpen ? (
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M6 18L18 6M6 6l12 12"
-              />
-            ) : (
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h16m-7 6h7"
-              />
-            )}
-          </svg>
-        </button>
-      </div>
     </nav>
   )
 }

@@ -1,66 +1,3 @@
-// import React from "react";
-// import { useLocation, useNavigate } from "react-router-dom";
-
-// export default function EventDetails() {
-//   const { state } = useLocation();
-//   const navigate = useNavigate();
-//   const event = state?.event;
-
-//   if (!event) {
-//     return (
-//       <div className="text-center mt-20 text-white">
-//         <h2 className="text-2xl font-bold">Event not found ❌</h2>
-//         <button
-//           onClick={() => navigate("/events")}
-//           className="mt-4 bg-yellow-400 text-black px-4 py-2 rounded-lg"
-//         >
-//           Back to Events
-//         </button>
-//       </div>
-//     );
-//   }
-
-//   return (
-//     <div className="relative min-h-screen flex justify-center items-center text-white">
-//       {/* Background Video */}
-//       <video
-//         autoPlay
-//         loop
-//         muted
-//         playsInline
-//         className="absolute top-0 left-0 w-full h-full object-cover -z-10 opacity-90"
-//       >
-//         <source src="/src/assets/homevideo.mp4" type="video/mp4" />
-//       </video>
-
-//       {/* Card */}
-//       <div className="bg-[#0B1221]/90 rounded-2xl shadow-xl p-8 max-w-xl w-full">
-//         {event.image && (
-//           <img
-//             src={event.image}
-//             alt={event.title}
-//             className="rounded-xl mb-4"
-//           />
-//         )}
-//         <h1 className="text-3xl font-bold mb-2">{event.title}</h1>
-//         <p className="text-gray-300 mb-4">{event.desc}</p>
-//         <p className="mb-2">📍 {event.location}</p>
-//         <p className="mb-2">🕒 {event.time}</p>
-//         <p className="mb-2">📅 {event.date}</p>
-//         <p className="mb-4 text-yellow-400">Seats Left: {event.seats}</p>
-
-//         <button
-//           onClick={() => navigate("/events")}
-//           className="bg-yellow-400 text-black px-4 py-2 rounded-lg font-bold hover:bg-yellow-300"
-//         >
-//           Back to Events
-//         </button>
-//       </div>
-//     </div>
-//   );
-// }
-
-
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -71,54 +8,76 @@ export default function EventDetails() {
 
   if (!event) {
     return (
-      <div className="text-center mt-20 text-white">
-        <h2 className="text-2xl font-bold">Event not found ❌</h2>
-        <button
-          onClick={() => navigate("/events")}
-          className="mt-4 bg-yellow-400 text-black px-4 py-2 rounded-lg"
-        >
-          Back to Events
-        </button>
+      <div className="flex items-center justify-center min-h-screen bg-gray-900 text-white">
+        <p>No event details available</p>
       </div>
     );
   }
 
   return (
-    <div className="relative min-h-screen flex justify-center items-center text-white">
-      {/* Background Video */}
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="absolute top-0 left-0 w-full h-full object-cover -z-10 opacity-90"
-      >
-        <source src="/src/assets/homevideo.mp4" type="video/mp4" />
-      </video>
-
-      {/* Card */}
-      <div className="bg-[#0B1221]/90 rounded-2xl shadow-xl p-8 max-w-xl w-full">
-        {event.image && (
+    <div className="min-h-screen text-white flex justify-center items-center px-6 py-10">
+      <div className="bg-[#0B1221]/90 p-6 rounded-2xl shadow-xl w-full max-w-3xl">
+        {/* Banner Image */}
+        {event.banner_image && (
           <img
-            src={event.image}
+            src={event.banner_image}
             alt={event.title}
-            className="rounded-xl mb-4"
+            className="rounded-xl mb-6 w-full h-64 object-cover"
           />
         )}
-        <h1 className="text-3xl font-bold mb-2">{event.title}</h1>
-        <p className="text-gray-300 mb-4">{event.desc}</p>
-        <p className="mb-2">📍 {event.location}</p>
-        <p className="mb-2">🕒 {event.time}</p>
-        <p className="mb-2">📅 {event.date}</p>
-        <p className="mb-4 text-yellow-400">Seats Left: {event.seats}</p>
 
-        {/* 🔴 Book Now Button */}
-        <button
-          onClick={() => navigate("/register", { state: { event } })}
-          className="bg-yellow-500 text-black px-6 py-3 rounded-lg font-bold hover:bg-yellow-500 w-full"
-        >
-          Book Now
-        </button>
+        {/* Title */}
+        <h1 className="text-3xl font-bold mb-4 text-yellow-400">{event.title}</h1>
+
+        {/* Description */}
+        <p className="text-gray-300 mb-6">{event.description}</p>
+
+        {/* Meta Info */}
+        <div className="grid grid-cols-2 gap-4 mb-6 text-sm">
+          <div className="flex flex-col bg-gray-800/50 p-3 rounded-lg">
+            <span className="text-gray-400">📍 Location</span>
+            <span className="font-semibold">{event.location}</span>
+          </div>
+          <div className="flex flex-col bg-gray-800/50 p-3 rounded-lg">
+            <span className="text-gray-400">🕒 Time</span>
+            <span className="font-semibold">{event.time}</span>
+          </div>
+          <div className="flex flex-col bg-gray-800/50 p-3 rounded-lg">
+            <span className="text-gray-400">🎟️ Seats Left</span>
+            <span className="text-yellow-400 font-semibold">{event.left_seats}</span>
+          </div>
+          <div className="flex flex-col bg-gray-800/50 p-3 rounded-lg">
+            <span className="text-gray-400">📅 Date</span>
+            <span className="text-yellow-300 font-semibold">{event.date}</span>
+          </div>
+        </div>
+
+        {/* Extra Info */}
+        {event.tags && (
+          <p className="mb-2"><span className="text-yellow-300">🏷️ Tags:</span> {event.tags}</p>
+        )}
+        {event.organizer && (
+          <p className="mb-2"><span className="text-yellow-300">👤 Organizer:</span> {event.organizer}</p>
+        )}
+        {event.highlights && (
+          <p className="mb-4"><span className="text-yellow-300">✨ Highlights:</span> {event.highlights}</p>
+        )}
+
+        {/* Action Buttons */}
+        <div className="flex justify-between mt-6">
+          <button
+            onClick={() => navigate(-1)}
+            className="bg-gray-600 hover:bg-gray-700 px-6 py-2 rounded-lg"
+          >
+            ← Back
+          </button>
+          <button
+            onClick={() => navigate("/register", { state: { event } })}
+            className="bg-yellow-400 hover:bg-yellow-300 text-black font-bold px-6 py-2 rounded-lg"
+          >
+            Register Now 🚀
+          </button>
+        </div>
       </div>
     </div>
   );
