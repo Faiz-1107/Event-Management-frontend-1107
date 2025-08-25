@@ -22,7 +22,7 @@ const Navbar = ({ onLoginClick, isLoggedIn, onLogout }) => {
       className={`fixed top-0 left-0 w-full flex items-center justify-between 
               px-2 py-2 md:px-16 md:py-2 lg:px-24 xl:px-32 
               transition-all duration-500 z-50 ${isScrolled
-          ? 'bg-white/80 shadow-md text-gray-700 backdrop-blur-lg'
+          ? 'bg-white/60 shadow-md text-gray-700 backdrop-blur-sm'
           : ''
         }`}
     >
@@ -64,7 +64,7 @@ const Navbar = ({ onLoginClick, isLoggedIn, onLogout }) => {
               className={`px-4 py-2 md:px-8 md:py-2.5 rounded-full ml-2 md:ml-4 transition-all duration-500 
                 ${isScrolled
                   ? 'text-white bg-red-600 hover:bg-white hover:text-red-600'
-                  : 'bg-red-600 text-white hover:bg-white hover:text-red-600'
+                  : 'bg-red-800 text-white hover:bg-white hover:text-red-600'
                 }`}
             >
               Log Out

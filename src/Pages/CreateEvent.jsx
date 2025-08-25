@@ -55,7 +55,7 @@ const CreateEvent = () => {
           <input name="organizer" placeholder="Organizer" value={formData.organizer} onChange={handleChange} className="p-2 rounded bg-gray-800 text-white col-span-2" />
           <textarea name="description" placeholder="Description" value={formData.description} onChange={handleChange} className="p-2 rounded bg-gray-800 text-white col-span-2" />
           <input name="banner_image" placeholder="Banner Image URL" value={formData.banner_image} onChange={handleChange} className="p-2 rounded bg-gray-800 text-white col-span-2" />
-          <button type="submit" className="col-span-2 bg-purple-600 hover:bg-purple-700 py-3 rounded-lg font-bold">🚀 Create Event</button>
+          <button type="submit" className="col-span-2 bg-cyan-800 hover:bg-cyan-500 py-3 rounded-lg font-bold">🚀 Create Event</button>
         </form>
       </div>
     </div>

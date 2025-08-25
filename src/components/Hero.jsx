@@ -8,7 +8,7 @@ const Hero = ({ isLoggedIn, onShowSignup }) => {
     return (
         <>
             <div className="relative flex flex-col items-start justify-center px-6 md:px-16 lg:px-24 xl:px-32 text-white h-screen overflow-hidden">
-                {/* Background Video */}
+
                 <video
                     autoPlay
                     loop
