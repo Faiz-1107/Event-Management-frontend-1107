@@ -60,9 +60,8 @@ const App = () => {
 
       <Routes>
         <Route
-          path="/"
-          element={
-            <Home
+          path="/" element={
+          <Home
               onShowSignup={() => {
                 setIsLogin(false);
                 setShowAuthModal(true);
