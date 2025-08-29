@@ -7,8 +7,9 @@ const Hero = ({ isLoggedIn, onShowSignup }) => {
 
     return (
         <>
+            {/* main hero section */}
             <div className="relative flex flex-col items-start justify-center px-6 md:px-16 lg:px-24 xl:px-32 text-white h-screen overflow-hidden">
-
+                {/* background video */}
                 <video
                     autoPlay
                     loop
@@ -18,10 +19,12 @@ const Hero = ({ isLoggedIn, onShowSignup }) => {
                     <source src="/src/assets/homevideo.mp4" type="video/mp4" />
                 </video>
 
+                {/* main title */}
                 <h1 className='font-playfair text-2xl md:text-5xl md:text-[56px] md:leading-[56px] font-bold md:font-extrabold mt-4'>
                     Welcome to Flavors around the World!
                 </h1>
 
+                {/* description text */}
                 <p className="max-w-130 mt-2 text-lg md:text-xl bg-[#fdf6e3] text-gray-800 p-6 rounded-xl shadow-md">
                     We’re thrilled to have you on board for this exciting marketplace of flavors and freshness.
                     Here, you’ll get the chance to bid, compete, and win the best of foods and fruits straight from nature’s basket.
@@ -30,8 +33,15 @@ const Hero = ({ isLoggedIn, onShowSignup }) => {
                 </p>
                 
             </div>
+
+            {/* footer section */}
+            <footer className="text-center px-5 py-10 bg-gray-800 text-gray-100 mt-auto">
+             <h3 className="mb-4">Follow Us</h3>
+             <p className="text-sm">Copyright © 2024. Event Management. All Rights Reserved</p>
+            </footer>
         </>
     )
 }
+
 
 export default Hero;

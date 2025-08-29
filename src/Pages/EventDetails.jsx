@@ -26,7 +26,7 @@ export default function EventDetails() {
           />
         )}
 
-        {/* Title */}
+         {/* Title  */}
         <h1 className="text-3xl font-bold mb-4 text-yellow-400">{event.title}</h1>
 
         {/* Description */}

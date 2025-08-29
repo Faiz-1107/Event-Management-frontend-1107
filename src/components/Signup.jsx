@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 
 export default function Signup({ onShowLogin }) {
+    // form input states
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [mobile, setMobile] = useState("");
@@ -17,6 +18,7 @@ export default function Signup({ onShowLogin }) {
         const userData = { name: username, email, mobile, password, role };
 
         try {
+            // send signup data to backend
             const res = await fetch("http://localhost:8888/signup", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -26,6 +28,7 @@ export default function Signup({ onShowLogin }) {
             const data = await res.json();
             if (res.ok) {
                 alert(data.message);
+                // clear form after successful signup
                 setUsername("");
                 setEmail("");
                 setMobile("");
@@ -42,6 +45,7 @@ export default function Signup({ onShowLogin }) {
     };
 
     return (
+        // signup form
         <form
             onSubmit={handleSubmit}
             className="bg-white text-gray-500 w-full max-w-[340px] mx-4 md:p-6 p-4 py-8 text-left text-sm rounded-lg shadow-[0px_0px_10px_0px] shadow-black/10"
@@ -117,6 +121,7 @@ export default function Signup({ onShowLogin }) {
                 {loading ? "Creating..." : "Create Account"}
             </button>
 
+            {/* switch to login */}
             <p className="text-center mt-4">
                 Already have an account?{" "}
                 <button
