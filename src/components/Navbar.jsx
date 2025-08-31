@@ -12,7 +12,7 @@ const Navbar = ({ onLoginClick, isLoggedIn, onLogout }) => {
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 10);
+    const handleScroll = () => setIsScrolled(window.scrollY > 1);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
